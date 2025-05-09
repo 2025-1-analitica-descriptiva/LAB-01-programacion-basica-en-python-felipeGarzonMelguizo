@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from homework.getData import getCsvData
 
 def pregunta_06():
     """
@@ -26,3 +27,27 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+
+    words = {}
+
+    data = getCsvData()
+
+    for row in data:
+        dictionary = row[4].split(",")
+        for separation in dictionary:
+            word, number = separation.split(":")
+            number = int(number)
+            wordHasValue = words.get(word, False)
+            if wordHasValue == False:
+                words[word] = [number, None]
+            else:
+                maximun = max(number,words[word][0])
+                minimun = min(number,words[word][1]) if words[word][1] != None else min(number,words[word][0])
+                words[word] = [maximun,minimun]
+    
+    result = [(word, maxAndMin[1],maxAndMin[0]) for word, maxAndMin in words.items()]
+    result.sort()
+
+    print(result)
+
+    return result
