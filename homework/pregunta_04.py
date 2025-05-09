@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from homework.getData import getCsvData
 
 def pregunta_04():
     """
@@ -26,3 +27,16 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    month_count = {}
+
+    data = getCsvData()
+
+    for row in data:
+        date = row[2]
+        month = date.split('-')[1]
+        month_count[month] = month_count.get(month, 0) + 1
+    
+    result = [(month, count) for month, count in month_count.items()]
+    result.sort()
+
+    return result
