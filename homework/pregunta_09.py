@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from homework.getData import getCsvData
 
 def pregunta_09():
     """
@@ -24,3 +25,17 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    words = {}
+
+    data = getCsvData()
+
+    for row in data:
+        dictionary = row[4].split(",")
+        for separation in dictionary:
+            word, _ = separation.split(":")
+            if word not in words:
+                words[word] = 1
+            else:
+                words[word] += 1
+
+    return words

@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from homework.getData import getCsvData
 
 def pregunta_08():
     """
@@ -27,3 +28,23 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    number_letters = {}
+    
+    data = getCsvData()
+    
+    for row in data:
+        letter = row[0]     
+        number = int(row[1]) 
+        
+        if number not in number_letters:
+            number_letters[number] = []
+
+        if letter not in number_letters[number]:
+            number_letters[number].append(letter)
+            number_letters[number].sort()
+    
+    result = [(num, letters) for num, letters in number_letters.items()]
+    result.sort()
+    print(result)
+    return result
+

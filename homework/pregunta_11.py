@@ -5,6 +5,7 @@ solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
 
+from homework.getData import getCsvData
 
 def pregunta_11():
     """
@@ -16,3 +17,18 @@ def pregunta_11():
 
 
     """
+    letter_sums = {}
+    data = getCsvData()
+    
+    for row in data:
+        value = int(row[1])  
+        letters = row[3].split(',') 
+        
+        for letter in letters:
+            if letter not in letter_sums:
+                letter_sums[letter] = 0
+            letter_sums[letter] += value
+    
+    result = dict(sorted(letter_sums.items()))
+    
+    return result
